@@ -3,9 +3,6 @@
 
   <option integrator="implicitfast"/>
 
-  <asset>
-
-  </asset>
   <default>
     <geom friction="3 3 3" density="7856" rgba="0 .9 0 .5" /> <!-- Плотность стали 10 по ГОСТ -->
 
