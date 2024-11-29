@@ -1,0 +1,125 @@
+<mujoco model="snake">
+  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+
+  <option integrator="implicitfast"/>
+
+  <asset>
+
+  </asset>
+  <default>
+    <geom friction="3 3 3" density="7856" rgba="0 .9 0 .5" /> <!-- Плотность стали 10 по ГОСТ -->
+
+    <default class="snake_body_segment">
+      <geom type="capsule" size=".009"  fromto="0 0 .013 .035 0 .013"/>
+    </default>
+
+    <default class="wheel_body">
+      <geom type="cylinder" size=".0035" />
+    </default>
+
+    <default class="wheel_joint">
+     <joint pos=".0075 0.005 .0035" axis="0 1 0" limited="false"/>
+    </default>
+
+    <default class="wheel_axle">
+      <geom type="cylinder" size=".001" fromto= ".0075 -.012 .0035 .0075 .012 .0035"/>
+    </default>
+
+    <default class="actuator_joint">
+      <joint pos="0 0 0" axis="0 0 1" limited="true" range="-3 3"/>
+    </default>
+
+  </default>
+
+  <worldbody>
+    <light name="light" mode="targetbodycom" target="seg_1" pos="0 -1 2"/>
+    <!-- Floor -->
+    <geom type="plane" size="1000 1000 0.1" rgba=".3 .3 .3 1"/>
+
+
+    <!-- Snake's head -->
+    <body name="seg_1" pos="0 0 0">
+
+      <camera name="camera" mode="trackcom" pos="0 0 0" xyaxes="-1 0 0 0 -1 1"/>
+
+      <joint type="free"/>
+      <geom name="head" class="snake_body_segment"/>
+
+      <body name="wheels_1" pos="0 0 0">
+        <joint class="wheel_joint"/>
+        <geom class="wheel_body" fromto=".0075 -.014 .0035 .0075 -.012 .0035"/>
+        <geom class="wheel_body" fromto=".0075 .014 .0035 .0075 .012 .0035"/>
+        <geom class="wheel_axle"/>
+      </body>
+
+      <body name="seg_2" pos="0.05 0 0">
+        <joint name="Actuator1" class="actuator_joint"/>
+        <geom class="snake_body_segment" />
+
+        <body name="wheels_2">
+          <joint class="wheel_joint"/>
+          <geom class="wheel_body" fromto=".0075 -.014 .0035 .0075 -.012 .0035"/>
+          <geom class="wheel_body" fromto=".0075 .014 .0035 .0075 .012 .0035"/>
+          <geom class="wheel_axle"/>
+        </body>
+
+        <body name="seg_3" pos="0.05 0 0">
+          <joint name="Actuator2" class="actuator_joint"/>
+          <geom class="snake_body_segment"/>
+
+          <body name="wheels_3">
+            <joint class="wheel_joint"/>
+            <geom class="wheel_body" fromto=".0075 -.014 .0035 .0075 -.012 .0035"/>
+            <geom class="wheel_body" fromto=".0075 .014 .0035 .0075 .012 .0035"/>
+            <geom class="wheel_axle"/>
+          </body>
+
+          <body name="seg_4" pos="0.05 0 0">
+            <joint name="Actuator3" class="actuator_joint"/>
+            <geom class="snake_body_segment"/>
+
+            <body name="wheels_4">
+              <joint class="wheel_joint"/>
+              <geom class="wheel_body" fromto=".0075 -.014 .0035 .0075 -.012 .0035"/>
+              <geom class="wheel_body" fromto=".0075 .014 .0035 .0075 .012 .0035"/>
+              <geom class="wheel_axle"/>
+            </body>
+
+            <body name="seg_5" pos="0.05 0 0">
+              <joint name="Actuator4" class="actuator_joint"/>
+              <geom class="snake_body_segment"/>
+
+              <body name="wheels_5">
+                <joint class="wheel_joint"/>
+                <geom class="wheel_body" fromto=".0075 -.014 .0035 .0075 -.012 .0035"/>
+                <geom class="wheel_body" fromto=".0075 .014 .0035 .0075 .012 .0035"/>
+                <geom class="wheel_axle"/>
+              </body>
+
+              <body name="seg_6" pos="0.05 0 0">
+                <joint name="Actuator5" class="actuator_joint"/>
+                <geom class="snake_body_segment"/>
+
+                <body  name="wheels_6">
+                  <joint class="wheel_joint"/>
+                  <geom class="wheel_body" fromto=".0075 -.014 .0035 .0075 -.012 .0035"/>
+                  <geom class="wheel_body" fromto=".0075 .014 .0035 .0075 .012 .0035"/>
+                  <geom class="wheel_axle"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+
+  <actuator>
+    <position name="Actuator1" joint="Actuator1" kp = "1" ctrllimited="true" ctrlrange="-3 3"/>
+    <position name="Actuator2" joint="Actuator2" kp = "1" ctrllimited="true" ctrlrange="-3 3"/>
+    <position name="Actuator3" joint="Actuator3" kp = "1" ctrllimited="true" ctrlrange="-3 3"/>
+    <position name="Actuator4" joint="Actuator4" kp = "1" ctrllimited="true" ctrlrange="-3 3"/>
+    <position name="Actuator5" joint="Actuator5" kp = "1" ctrllimited="true" ctrlrange="-3 3"/>
+  </actuator>
+</mujoco>
